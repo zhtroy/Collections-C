@@ -102,14 +102,14 @@ void          list_destroy_cb      (List *list, void (*cb) (void*));
 enum cc_stat  list_splice          (List *list1, List *list2);
 enum cc_stat  list_splice_at       (List *list, List *list2, size_t index);
 
-enum cc_stat  list_add             (List *list, void *element);
+enum cc_stat  list_add_             (List *list, void *element);
 enum cc_stat  list_add_at          (List *list, void *element, size_t index);
 enum cc_stat  list_add_all         (List *list1, List *list2);
 enum cc_stat  list_add_all_at      (List *list, List *list2, size_t index);
 enum cc_stat  list_add_first       (List *list, void *element);
 enum cc_stat  list_add_last        (List *list, void *element);
 
-enum cc_stat  list_remove          (List *list, void *element, void **out);
+enum cc_stat  list_remove_          (List *list, void *element, void **out);
 enum cc_stat  list_remove_first    (List *list, void **out);
 enum cc_stat  list_remove_last     (List *list, void **out);
 enum cc_stat  list_remove_at       (List *list, size_t index, void **out);

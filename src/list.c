@@ -139,7 +139,7 @@ void list_destroy_cb(List *list, void (*cb) (void*))
  * @return CC_OK if the element was successfully added, or CC_ERR_ALLOC if the
  * memory allocation for the new element failed.
  */
-enum cc_stat list_add(List *list, void *element)
+enum cc_stat list_add_(List *list, void *element)
 {
     return list_add_last(list, element);
 }
@@ -505,7 +505,7 @@ static void splice_between(List *l1, List *l2, Node *left, Node *right)
  * @return CC_OK if the element was successfully removed, or
  * CC_ERR_VALUE_NOT_FOUND if the element was not found.
  */
-enum cc_stat list_remove(List *list, void *element, void **out)
+enum cc_stat list_remove_(List *list, void *element, void **out)
 {
     Node *node = get_node(list, element);
 
@@ -806,7 +806,7 @@ enum cc_stat list_sublist(List *list, size_t b, size_t e, List **out)
 
     size_t i;
     for (i = b; i <= e; i++) {
-        status = list_add(sub, node->data);
+        status = list_add_(sub, node->data);
         if (status != CC_OK) {
             list_destroy(sub);
             return status;
@@ -852,7 +852,7 @@ enum cc_stat list_copy_shallow(List *list, List **out)
         return CC_OK;
     }
     while (node) {
-        status = list_add(copy, node->data);
+        status = list_add_(copy, node->data);
         if (status != CC_OK) {
             list_destroy(copy);
             return status;
@@ -899,7 +899,7 @@ enum cc_stat list_copy_deep(List *list, void *(*cp) (void *e1), List **out)
     }
 
     while (node) {
-        status = list_add(copy, cp(node->data));
+        status = list_add_(copy, cp(node->data));
         if (status != CC_OK) {
             list_destroy(copy);
             return status;
@@ -1286,7 +1286,7 @@ enum cc_stat list_filter(List *list, bool (*pred) (const void*), List **out)
 
     while (curr) {
         if (pred(curr->data)) {
-            list_add(filtered, curr->data);
+            list_add_(filtered, curr->data);
         }
         curr = curr->next;
     }
